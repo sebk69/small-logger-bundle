@@ -1,2 +1,2 @@
 # SmallHttpLoggerBundle
-Ymfony logger for log server like logstash
+Symfony logger for log server like logstash
