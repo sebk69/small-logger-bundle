@@ -1,0 +1,6 @@
+services:
+  _defaults:
+    public: true
+    autowire: true
+  Sebk\SmallHttpLoggerBundle\Logger\Logger:
+    arguments: ['%sebk_small_http_logger%', '@Symfony\Contracts\HttpClient\HttpClientInterface']
