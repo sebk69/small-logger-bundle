@@ -1,0 +1,15 @@
+{
+  "name": "sebk/small-http-logger-bundle",
+  "description": "Symfony logger for log server like logstash",
+  "minimum-stability": "stable",
+  "license": "GPL-3.0-only",
+  "authors": [
+    {
+      "name": "Sebastien Kus",
+      "email": "seb@small-iceberg.dev"
+    }
+  ],
+  "require": {
+    "symfony/http-client": "*"
+  }
+}
