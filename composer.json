@@ -11,5 +11,8 @@
   ],
   "require": {
     "symfony/http-client": "*"
-  }
+  },
+  "autoload": {
+    "psr-4": { "Sebk\\SmallUserBundle\\": "" }
+  },
 }
