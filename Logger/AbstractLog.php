@@ -69,7 +69,21 @@ abstract class AbstractLog implements \JsonSerializable
      */
     public function getUTCTimestamp()
     {
-        return $this->getTimestamp()->format("Y-m-d\TH:i:s\Z");
+        return $this->getTimestamp()->format("c");
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'date' => $this->getUTCTimestamp(),
+            'level' => $this->level,
+            'message' => $this->message,
+        ];
+    }
+    
+    public function jsonSerialize(): mixed
+    {
+        return $this->toArray();
     }
 
 }
