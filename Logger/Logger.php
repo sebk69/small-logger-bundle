@@ -7,6 +7,10 @@
 
 namespace Sebk\SmallHttpLoggerBundle\Logger;
 
+use App\Log\AuthFlowLog;
+use Sebk\SmallSwoolePatterns\Observable\Observable;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class Logger
@@ -29,6 +33,10 @@ class Logger
      */
     public function log(AbstractLog $log)
     {
+        if (class_exists(\Co\Http\Client::class)) {
+            $this->swooleLog($log);
+        }
+
         $this->httpClient->request(
             "POST",
             "http://".$this->config["http_logger_server"].":".$this->config["http_logger_port"],
@@ -37,5 +45,22 @@ class Logger
                 "body" => json_encode($log),
             ]
         );
+    }
+
+    /**
+     * Send a log to log server async
+     * @param AbstractLog $log
+     * @return void
+     * @throws \Sebk\SmallSwoolePatterns\Observable\ObservableAlreadyRanException
+     */
+    public function swooleLog(AbstractLog $log)
+    {
+        (new Observable(function(AbstractLog $log) {
+            // Get access token infos
+            $client = new \Co\Http\Client($this->config["http_logger_server"], $this->config["http_logger_port"]);
+            $client->setHeaders(["content-type" => "application/json"]);
+            $client->post('', $log);
+            $client->close();
+        }))->run($log);
     }
 }
