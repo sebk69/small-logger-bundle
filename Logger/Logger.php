@@ -35,6 +35,7 @@ class Logger
     {
         if (class_exists(\Co\Http\Client::class)) {
             $this->swooleLog($log);
+            return;
         }
 
         $this->httpClient->request(
@@ -55,12 +56,15 @@ class Logger
      */
     public function swooleLog(AbstractLog $log)
     {
-        (new Observable(function(AbstractLog $log) {
+	$server = $this->config["http_logger_server"];
+	$port = $this->config["http_logger_port"];
+        $func = function($log) use($server, $port) {
             // Get access token infos
-            $client = new \Co\Http\Client($this->config["http_logger_server"], $this->config["http_logger_port"]);
+            $client = new \Co\Http\Client($server, $port);
             $client->setHeaders(["content-type" => "application/json"]);
-            $client->post('', $log);
+            $client->post('/', json_encode($log));
             $client->close();
-        }))->run($log);
+	};
+	(new Observable($func))->run($log);
     }
 }
