@@ -13,6 +13,6 @@
     "php": ">=8.0"
   },
   "autoload": {
-    "psr-4": { "Sebk\\SmallLoggerBundle\\": "" }
+    "psr-4": { "Sebk\\SmallLoggerBundle\\": "src" }
   }
 }
