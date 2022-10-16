@@ -8,7 +8,7 @@
 
 namespace Sebk\SmallLoggerBundle\Contracts;
 
-use Symfony\Component\Console\Output\OutputInterface;
+use Sebk\SmallLoggerBundle\Contracts\OutputInterface;
 
 interface StreamInterface
 {
@@ -34,5 +34,6 @@ interface StreamInterface
      * @param OutputInterface $output
      * @return StreamInterface
      */
-    public function setOutputFor(OutputInterface $output): StreamInterface;
+    public function setOutput(OutputInterface $output): StreamInterface;
+
 }

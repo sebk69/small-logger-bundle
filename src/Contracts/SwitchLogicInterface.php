@@ -8,7 +8,7 @@
 
 namespace Sebk\SmallLoggerBundle\Contracts;
 
-interface SwitchInterface
+interface SwitchLogicInterface
 {
 
     /**
