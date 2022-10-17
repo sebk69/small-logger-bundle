@@ -11,7 +11,7 @@
   ],
   "require": {
     "php": ">=8.0",
-    "sebk/small-logger": "dev-main"
+    "sebk/small-logger": ">=1.0"
   },
   "autoload": {
     "psr-4": { "Sebk\\SmallLoggerBundle\\": "src" }
