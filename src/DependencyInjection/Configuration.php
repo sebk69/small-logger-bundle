@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is a part of SebkSmallHttpLoggerBundle
+ * This file is a part of small-logger-bundle
  * Copyright 2020 - Sébastien Kus
  * Under GNU GPL V3 licence
  */
 
-namespace Sebk\SmallHttpLoggerBundle\DependencyInjection;
+namespace Sebk\SmallLoggerBundle\DependencyInjection;
 
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -23,7 +23,7 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder("sebk_small_http_logger");
+        $treeBuilder = new TreeBuilder("small_logger");
         $rootNode = $treeBuilder->getRootNode();
 
         $rootNode

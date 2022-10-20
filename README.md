@@ -1,5 +1,6 @@
-# SmallHttpLoggerBundle
-Symfony logger for log server like logstash
+# small-logger-bundle
+Symfony small logger
+
+In reality, it is only a bridge between symfony and small-logger.
 
 ## Documentation
-Here is the documentation : [https://small-iceberg.dev/index.php/SmallHttpLoggerBundle](https://small-iceberg.dev/index.php/SmallHttpLoggerBundle)
