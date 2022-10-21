@@ -23,14 +23,14 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder("small_logger");
+        $treeBuilder = new TreeBuilder('small_logger');
         $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
             ->children()
-              ->scalarNode("http_logger_server")
+            ->arrayNode("shortcuts")
+            ->prototype("scalar")->end()
             ->end()
-              ->scalarNode("http_logger_port")
             ->end()
         ;
 

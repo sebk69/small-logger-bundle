@@ -9,7 +9,9 @@ namespace Sebk\SmallLoggerBundle\Service;
 
 use Sebk\SmallLogger\Contracts\LogInterface;
 use Sebk\SmallLogger\Contracts\SwitchLogicInterface;
+use Sebk\SmallLogger\Output\OutputFactory;
 use Sebk\SmallLoggerBundle\Contracts\ShortcutInterface;
+use Sebk\SmallLoggerBundle\Output\SymfonyHttpOutput;
 
 class Logger
 {
@@ -18,6 +20,10 @@ class Logger
 
     public function __construct(protected SwitchLogicInterface $switchLogic, array $shortcuts)
     {
+        // Add symfony output to OutputFactory
+        OutputFactory::addOutput('http', SymfonyHttpOutput::class);
+
+        // Add shortcuts
         foreach ($shortcuts as $shortcutsClass) {
             new $shortcutsClass($this);
         }
@@ -37,7 +43,7 @@ class Logger
     }
 
     /**
-     * Regiter a shortcut
+     * Register a shortcut
      * For example after calling :
      * $container->get('logger')->registerShortcut('info', function(Logger $logger, string $message) {
      *   $logger->log(new BassicLog(new \DateTime, LogInterface::ERR_LEVEL_INFO, $message));
@@ -59,7 +65,8 @@ class Logger
      * Call shortcuts
      * @param $name
      * @param $arguments
-     * @return Logger
+     * @return $this
+     * @throws \Exception
      */
     public function __call($name, $arguments): Logger {
         if (array_key_exists($name, $this->shortcuts)) {
