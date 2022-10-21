@@ -9,13 +9,19 @@ namespace Sebk\SmallLoggerBundle\Service;
 
 use Sebk\SmallLogger\Contracts\LogInterface;
 use Sebk\SmallLogger\Contracts\SwitchLogicInterface;
+use Sebk\SmallLoggerBundle\Contracts\ShortcutInterface;
 
 class Logger
 {
-    /** @var Closure[] */
+    /** @var \Closure[] */
     protected array $shortcuts = [];
 
-    public function __construct(protected SwitchLogicInterface $switchLogic) {}
+    public function __construct(protected SwitchLogicInterface $switchLogic, array $shortcuts)
+    {
+        foreach ($shortcuts as $shortcutsClass) {
+            new $shortcutsClass($this);
+        }
+    }
 
     /**
      * Write log
@@ -43,7 +49,7 @@ class Logger
      * @param Closure $closure
      * @return $this
      */
-    public function registerShortcut(string $name, Closure $closure): Logger {
+    public function registerShortcut(string $name, \Closure $closure): Logger {
         $this->shortcuts[$name] = $closure;
         
         return $this;
@@ -56,8 +62,8 @@ class Logger
      * @return Logger
      */
     public function __call($name, $arguments): Logger {
-        if (array_key_exists($name, self::$shortcuts)) {
-            $closure = $this->$shortcuts[$name];
+        if (array_key_exists($name, $this->shortcuts)) {
+            $closure = $this->shortcuts[$name];
             $closure($this, ...$arguments);
             
             return $this;

@@ -27,7 +27,7 @@ class SebkSmallLoggerExtension extends Extension
         // Read configuration
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
-        $container->setParameter('small_logger_config', $config);
+        //$container->setParameter('small_logger.shortcuts', $config['shortcuts']);
 
         // Load service.yml
         $loader = new Loader\PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));

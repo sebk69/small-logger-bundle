@@ -10,5 +10,9 @@ return function(ContainerConfigurator $configurator) {
         ->autoconfigure(false)
     ;
 
-    $services->set(\Sebk\SmallLoggerBundle\Service\Logger::class);
+    $services->set(\Sebk\SmallLoggerBundle\Service\Logger::class)
+        ->args([service(SwitchLogicInterface::class), [
+            \App\Log\Shortcuts::class
+        ]])
+    ;
 };
