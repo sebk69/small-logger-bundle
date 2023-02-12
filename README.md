@@ -5,6 +5,14 @@ In reality, it is only a bridge between symfony and [small-logger](https://githu
 
 Additionnaly, this package implement a symfony native http client for http output.
 
+# Migrated
+
+This lib has been migrated to [framagit](https://framagit.org/small) project.
+
+A new composer package is available at https://packagist.org/packages/small/logger-bundle
+
+Future commits will be done on framagit.
+
 ## Install
 
 Use composer to install the package in your symfony project :
